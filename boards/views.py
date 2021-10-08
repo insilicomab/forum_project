@@ -3,6 +3,8 @@ from django.shortcuts import render
 from . import forms
 from django.contrib import messages
 
+
+
 '''
 掲示板投稿
 '''
