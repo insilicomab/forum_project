@@ -17,7 +17,7 @@ class Themes(models.Model):
         'accounts.Users', on_delete=models.CASCADE
     )
 
-    # objects = ThemesManager()
+    objects = ThemesManager()
 
     class Meta:
         db_table = 'themes'
