@@ -26,6 +26,11 @@ class Themes(models.Model):
 Commentsテーブル
 '''
 
+class CommentsManager(models.Manager):
+    # テーマのidでfilterして、id順に並び替えて、全て取得する
+    def fetch_by_theme_id(self, theme_id):
+        return self.filter(theme_id=theme_id).order_by('id').all()
+
 class Comments(models.Model):
 
     comment = models.CharField(max_length=1000)
@@ -35,7 +40,7 @@ class Comments(models.Model):
     theme = models.ForeignKey(
         'Themes', on_delete=models.CASCADE
     )
-    #objects = CommentsManager()
+    objects = CommentsManager()
 
     class Meta:
         db_table = 'comments'

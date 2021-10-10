@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 <h3>{{ theme.title }}</h3>
-<form method="POST">
-{% csrf_token %}
-{{ post_comment_form.as_p }}
-<input type="submit" value="コメント送信">
-</form>
-{% endblock %}ß
+{% for comment in comments %}
+<div class="col-1 offset-1">
+  {% if comment.user.picture %}
+   <img style="float:left;" width="50px" height="50px" src="{{ comment.user.picture.url }}">
+  {% endif %}
+</div>
+<div class="col-8 offset-2">
+  <p>名前: {{ comment.user.username }}</p>
+  <p>{{ comment.comment | linebreaks }}</p> <!-- linebreaks:改行を改行として認識 -->
+</div>
+<div class="col-10 offset-1">
+<hr>
+</div>
+{% endfor %}
+{% if user.is_authenticated %}
+<div class="col-4 offset-7">
+  <form method="POST">
+  {% csrf_token %}
+  {{ post_comment_form.as_p }}
+  <input type="submit" value="コメント送信">
+  </form>
+</div>
+{% endif %}
+{% endblock %}
