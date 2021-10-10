@@ -110,3 +110,12 @@ def change_password(request):
             'password_change_form': password_change_form,
         }
     )
+
+'''
+404エラー発生時の処理
+'''
+
+def show_error_page(request, exception):
+    return render(
+        request, '404.html'
+    )
